@@ -1,0 +1,136 @@
+/* =========================================
+   Global Variables (ใช้ร่วมกันทั้ง 3 หน้า)
+   ========================================= */
+:root {
+    --primary-color: #2C3E50;
+    --accent-color: #E67E22;
+    --bg-color: #FDFCF0;
+    --text-color: #1A1A1A;
+}
+
+/* =========================================
+   สไตล์เฉพาะหน้าแรก (Home Page)
+   ========================================= */
+#home-page {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(#BDC3C7 0.8px, transparent 0.8px);
+    background-size: 24px 24px;
+    font-family: 'Sarabun', sans-serif;
+    overflow-x: hidden;
+}
+
+#home-page h1, #home-page h2 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* --- แอนิเมชันเปิดหนังสือและซูม (Intro Overlay) --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 50; /* ให้อยู่บนสุดเสมอ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+    pointer-events: none; /* ไม่ให้บล็อกการคลิกหน้าเว็บข้างล่าง */
+    /* แอนิเมชันซูมทะลุและจางหายไป เริ่มทำงานวินาทีที่ 2 */
+    animation: zoomIntoBook 1.5s ease-in forwards 2s;
+}
+
+#intro-overlay .book-container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transform-style: preserve-3d;
+}
+
+/* ปกหนังสือ */
+#intro-overlay .book-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 2px 10px 10px 2px;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
+    transform-origin: left center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    /* แอนิเมชันเปิดปกหนังสือ */
+    animation: openBookCover 1.5s cubic-bezier(0.645, 0.045, 0.355, 1) forwards 0.5s;
+}
+
+#intro-overlay .book-cover-text {
+    color: var(--bg-color);
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+/* หน้ากระดาษข้างในหนังสือ */
+#intro-overlay .book-inside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border-radius: 2px 10px 10px 2px;
+    box-shadow: inset 4px 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* Keyframes */
+@keyframes openBookCover {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(-140deg); box-shadow: -5px 5px 20px rgba(0,0,0,0.2); }
+}
+
+@keyframes zoomIntoBook {
+    0% { transform: scale(1); opacity: 1; }
+    80% { opacity: 0; }
+    100% { transform: scale(15); opacity: 0; visibility: hidden; display: none; }
+}
+
+/* --- เอฟเฟกต์การ์ดหนังสือขายดี --- */
+#home-page .book-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#home-page .book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* สร้างเส้นขอบและเงาให้หัวข้อใหญ่ (Title) */
+.text-outline-pop {
+    color: var(--primary-color); /* สีน้ำเงินเข้ม */
+    text-shadow: 
+        -2px -2px 0 var(--bg-color),  
+         2px -2px 0 var(--bg-color),
+        -2px  2px 0 var(--bg-color),
+         2px  2px 0 var(--bg-color),
+         0px  8px 15px rgba(0,0,0,0.3); /* เงาดำเข้มๆ ด้านล่างให้ข้อความลอยขึ้นมา */
+}
+
+/* สร้างแสงเรืองแสง (Glow) ให้ข้อความบรรยาย (Description) */
+.text-glow-read {
+    color: #000000;
+    font-weight: bold;
+    /* แสงฟุ้งๆ สีครีมกระจายรอบตัวอักษร ช่วยให้อ่านง่ายบนพื้นหลังทุกลาย */
+    text-shadow: 
+        0 0 10px var(--bg-color),
+        0 0 20px var(--bg-color),
+        0 0 30px var(--bg-color);
+}
