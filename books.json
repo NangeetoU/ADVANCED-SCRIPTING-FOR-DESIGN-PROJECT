@@ -1,0 +1,33 @@
+[
+  {"id":1,"title":"The Wild Adventure","price":350,"type":"fiction","image":"assets/books/book1.jpg"},
+  {"id":2,"title":"Forest of Secrets","price":320,"type":"fiction","image":"assets/books/book2.jpg"},
+  {"id":3,"title":"Shadow Kingdom","price":410,"type":"fiction","image":"assets/books/book3.jpg"},
+  {"id":4,"title":"The Last Traveler","price":360,"type":"fiction","image":"assets/books/book4.jpg"},
+  {"id":5,"title":"Dreams of Tomorrow","price":330,"type":"fiction","image":"assets/books/book5.jpg"},
+  {"id":6,"title":"Silent River","price":295,"type":"fiction","image":"assets/books/book6.jpg"},
+  {"id":7,"title":"Golden Horizon","price":370,"type":"fiction","image":"assets/books/book7.jpg"},
+
+  {"id":8,"title":"Mindset of Success","price":290,"type":"self-help","image":"assets/books/book8.jpg"},
+  {"id":9,"title":"Atomic Habits Guide","price":340,"type":"self-help","image":"assets/books/book9.jpg"},
+  {"id":10,"title":"Focus Your Mind","price":310,"type":"self-help","image":"assets/books/book10.jpg"},
+  {"id":11,"title":"Discipline Every Day","price":300,"type":"self-help","image":"assets/books/book11.jpg"},
+  {"id":12,"title":"Power of Consistency","price":280,"type":"self-help","image":"assets/books/book12.jpg"},
+  {"id":13,"title":"Confidence Builder","price":305,"type":"self-help","image":"assets/books/book13.jpg"},
+  {"id":14,"title":"The Productive Life","price":315,"type":"self-help","image":"assets/books/book14.jpg"},
+
+  {"id":15,"title":"Design Thinking","price":420,"type":"business","image":"assets/books/book15.jpg"},
+  {"id":16,"title":"Startup Blueprint","price":390,"type":"business","image":"assets/books/book16.jpg"},
+  {"id":17,"title":"Marketing Mastery","price":410,"type":"business","image":"assets/books/book17.jpg"},
+  {"id":18,"title":"Leadership Strategy","price":435,"type":"business","image":"assets/books/book18.jpg"},
+  {"id":19,"title":"The Lean Startup Way","price":400,"type":"business","image":"assets/books/book19.jpg"},
+  {"id":20,"title":"Creative Entrepreneurship","price":375,"type":"business","image":"assets/books/book20.jpg"},
+  {"id":21,"title":"Business Growth Playbook","price":395,"type":"business","image":"assets/books/book21.jpg"},
+
+  {"id":22,"title":"Into the Future","price":310,"type":"science","image":"assets/books/book22.jpg"},
+  {"id":23,"title":"Cosmos Explained","price":450,"type":"science","image":"assets/books/book23.jpg"},
+  {"id":24,"title":"Quantum World","price":430,"type":"science","image":"assets/books/book24.jpg"},
+  {"id":25,"title":"AI Revolution","price":410,"type":"science","image":"assets/books/book25.jpg"},
+  {"id":26,"title":"The Brain Inside","price":360,"type":"science","image":"assets/books/book26.jpg"},
+  {"id":27,"title":"Physics of Everything","price":440,"type":"science","image":"assets/books/book27.jpg"},
+  {"id":28,"title":"Life of the Universe","price":420,"type":"science","image":"assets/books/book28.jpg"}
+]
