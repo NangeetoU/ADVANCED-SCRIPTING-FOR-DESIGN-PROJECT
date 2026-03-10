@@ -164,11 +164,11 @@
         </div>
     </div>
 
-    <nav class="sticky top-0 w-full flex justify-between items-center px-6 md:px-10 py-5 z-40 bg-[#2C3E50] shadow-md transition-all">
+    <nav class="sticky top-0 w-full flex flex-wrap justify-between items-center gap-4 px-6 md:px-10 py-5 z-40 bg-[#2C3E50] shadow-md transition-all">
         <div class="text-2xl font-bold text-[#FDFCF0] tracking-widest font-serif">
             <span class="!text-[#E67E22]">THE</span> BOOKBRALY
         </div>
-        <ul class="hidden md:flex space-x-8 text-[#FDFCF0] font-medium text-sm">
+        <ul class="flex flex-wrap gap-4 text-[#FDFCF0] font-medium text-xs sm:text-sm w-full md:w-auto">
             <li><a href="index.html" class="hover:text-[#E67E22] transition pb-1">HOME</a></li>
             <li><a href="catalog.html" class="border-b-2 border-[#E67E22]">SHOP</a></li>
             <li><a href="summary.html" class="hover:text-[#E67E22] transition pb-1">SUMMARY</a></li>
@@ -176,7 +176,7 @@
         
     </nav>
 
-    <section id="bestsellers" class="pt-24 pb-16 px-6 md:px-20 max-w-7xl mx-auto relative z-10">
+    <section id="bestsellers" class="pt-20 sm:pt-24 pb-16 px-6 md:px-20 max-w-7xl mx-auto relative z-10">
         <div class="mb-12 border-b-2 border-[#BDC3C7] pb-4">
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
                 <h2 class="text-3xl text-[#2C3E50] font-bold font-serif">Book Catalog</h2>
@@ -189,7 +189,7 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
             <p id="cart-feedback" class="hidden text-sm text-[#2C3E50] font-semibold"></p>
             <p class="text-sm text-[#2C3E50]">Cart items: <span id="cart-count" class="font-bold">0</span></p>
         </div>
@@ -200,6 +200,7 @@
     <script src="js/catalog.js"></script>
 </body>
 </html>
+
 
 
 
