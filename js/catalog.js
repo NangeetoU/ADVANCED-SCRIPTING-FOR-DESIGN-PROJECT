@@ -1,15 +1,18 @@
+// อ้างอิง Element จาก HTML
 const bookList = document.getElementById('book-list');
 const typeFilter = document.getElementById('type-filter');
 const emptyState = document.getElementById('empty-state');
 const cartCount = document.getElementById('cart-count');
 const cartFeedback = document.getElementById('cart-feedback');
 
+// Key สำหรับบันทึกข้อมูลใน LocalStorage
 const CART_STORAGE_KEY = 'bookbraly_cart';
 
 let allBooks = [];
 let cart = [];
 let feedbackTimer = null;
 
+// 1. ฟังก์ชันแสดงรายการหนังสือ
 function renderBooks(books) {
   bookList.innerHTML = '';
 
@@ -22,19 +25,30 @@ function renderBooks(books) {
 
   books.forEach((book, index) => {
     const card = document.createElement('article');
-    card.className = 'book-card catalog-card-enter text-center block group bg-[#FDFCF0] border border-[#BDC3C7] p-4 rounded transition-transform duration-300 hover:-translate-y-1';
-    card.style.animationDelay = `${index * 60}ms`;
+    card.className = 'book-card catalog-card-enter group bg-white border border-[#BDC3C7] p-5 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300';
+    card.style.animationDelay = `${index * 50}ms`;
 
     card.innerHTML = `
-      <div class="w-full h-72 bg-[#BDC3C7] rounded mb-4 flex items-center justify-center text-[#1A1A1A] overflow-hidden shadow-md">
-        <img src="${book.image}" alt="${book.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.textContent='No Image';" />
+      <div class="relative w-full h-72 bg-[#f3f3f3] rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+        <img src="${book.image}" alt="${book.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+             onerror="this.src='https://via.placeholder.com/300x400?text=No+Image';" />
+        <div class="absolute top-2 right-2 bg-[#2C3E50]/80 text-white text-[10px] px-2 py-1 rounded uppercase tracking-widest">
+            ${book.type}
+        </div>
       </div>
-      <h3 class="font-bold text-[#2C3E50] group-hover:text-[#E67E22] transition-colors">${book.title}</h3>
-      <p class="text-[#2C3E50] text-sm mt-1">${book.type}</p>
-      <p class="text-[#E67E22] font-semibold mt-1">&#3647; ${book.price.toFixed(2)}</p>
-      <div class="mt-4 flex items-center justify-center gap-2">
-        <input type="number" min="1" value="1" class="cart-qty w-16 border border-[#BDC3C7] rounded px-2 py-1 text-center" aria-label="Quantity for ${book.title}">
-        <button class="cart-btn border border-[#2C3E50] text-[#2C3E50] px-3 py-1 rounded font-semibold hover:bg-[#2C3E50] hover:text-white transition" data-book-id="${book.id}">Add to Cart</button>
+      
+      <h3 class="font-bold text-[#2C3E50] text-lg leading-tight h-14 line-clamp-2 mb-2 group-hover:text-[#E67E22] transition-colors">
+        ${book.title}
+      </h3>
+      
+      <p class="text-[#E67E22] font-bold text-xl mb-4">฿ ${book.price.toLocaleString()}.00</p>
+      
+      <div class="flex items-center gap-2 mt-auto">
+        <input type="number" min="1" value="1" class="cart-qty w-14 border border-[#BDC3C7] rounded-lg px-2 py-2 text-center text-sm outline-none focus:border-[#E67E22]">
+        <button class="cart-btn flex-1 bg-[#2C3E50] text-white py-2 rounded-lg font-bold text-sm hover:bg-[#E67E22] transition-all" 
+                data-book-id="${book.id}">
+            ADD TO CART
+        </button>
       </div>
     `;
 
@@ -42,139 +56,110 @@ function renderBooks(books) {
   });
 }
 
+// 2. ระบบกรองประเภทหนังสือ
 function applyTypeFilter() {
   const selectedType = typeFilter.value;
+  const filteredBooks = selectedType === 'all' 
+    ? [...allBooks] 
+    : allBooks.filter(book => book.type === selectedType);
 
-  const filteredBooks =
-    selectedType === 'all'
-      ? [...allBooks]
-      : allBooks.filter((book) => book.type === selectedType);
-
-  const sortedBooks = filteredBooks.sort((a, b) => a.type.localeCompare(b.type));
-  renderBooks(sortedBooks);
+  renderBooks(filteredBooks);
 }
 
+// 3. สร้างตัวเลือกหมวดหมู่ใน Select
 function fillTypeOptions(books) {
-  const types = [...new Set(books.map((book) => book.type))].sort();
-
-  types.forEach((type) => {
+  const types = [...new Set(books.map(book => book.type))].sort();
+  types.forEach(type => {
     const option = document.createElement('option');
     option.value = type;
-    option.textContent = type;
+    option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
     typeFilter.appendChild(option);
   });
 }
 
-function loadCartFromStorage() {
-  const stored = localStorage.getItem(CART_STORAGE_KEY);
-  if (!stored) return null;
-
-  try {
-    const parsed = JSON.parse(stored);
-    return Array.isArray(parsed) ? parsed : null;
-  } catch (error) {
-    return null;
-  }
-}
-
+// 4. จัดการ LocalStorage
 function saveCartToStorage() {
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
+function loadCartFromStorage() {
+  const stored = localStorage.getItem(CART_STORAGE_KEY);
+  if (!stored) return [];
+  try {
+    return JSON.parse(stored);
+  } catch (e) {
+    return [];
+  }
+}
+
+// 5. อัปเดตตัวเลขตะกร้า
 function updateCartCount() {
   const total = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = total.toString();
+  if (cartCount) cartCount.textContent = total;
 }
 
-function showCartFeedback(message) {
-  if (!cartFeedback) return;
-
-  cartFeedback.textContent = message;
-  cartFeedback.classList.remove('hidden');
-
-  if (feedbackTimer) {
-    clearTimeout(feedbackTimer);
-  }
-
-  feedbackTimer = setTimeout(() => {
-    cartFeedback.classList.add('hidden');
-  }, 1600);
-}
-
+// 6. เพิ่มสินค้าลงตะกร้า
 function addToCart(bookId, quantity) {
-  const book = allBooks.find((item) => item.id === bookId);
+  const book = allBooks.find(b => b.id === bookId);
   if (!book) return;
 
-  const existing = cart.find((item) => item.id === bookId);
+  const existing = cart.find(item => item.id === bookId);
   if (existing) {
     existing.quantity += quantity;
   } else {
-    cart.push({
-      id: book.id,
-      title: book.title,
-      price: book.price,
-      type: book.type,
-      image: book.image,
-      quantity,
-    });
+    cart.push({ ...book, quantity });
   }
 
   saveCartToStorage();
   updateCartCount();
-  showCartFeedback(`Added ${quantity} to cart`);
+  showCartFeedback(`Added ${quantity} item(s) to cart`);
 }
 
+function showCartFeedback(msg) {
+  if (!cartFeedback) return;
+  cartFeedback.textContent = msg;
+  cartFeedback.classList.remove('hidden');
+  if (feedbackTimer) clearTimeout(feedbackTimer);
+  feedbackTimer = setTimeout(() => cartFeedback.classList.add('hidden'), 2000);
+}
+
+// 7. Event Listeners
 function attachCartHandlers() {
-  bookList.addEventListener('click', (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLElement)) return;
-    if (!target.classList.contains('cart-btn')) return;
+  bookList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('cart-btn')) {
+      const btn = e.target;
+      const card = btn.closest('article');
+      const qtyInput = card.querySelector('.cart-qty');
+      const quantity = parseInt(qtyInput.value) || 1;
+      const bookId = parseInt(btn.dataset.bookId);
 
-    const card = target.closest('article');
-    if (!card) return;
-
-    const qtyInput = card.querySelector('.cart-qty');
-    const rawQty = qtyInput ? Number(qtyInput.value) : 1;
-    const quantity = Number.isFinite(rawQty) && rawQty > 0 ? Math.floor(rawQty) : 1;
-
-    const bookId = Number(target.dataset.bookId);
-    if (!Number.isFinite(bookId)) return;
-
-    addToCart(bookId, quantity);
-    target.classList.add('is-pressed');
-    setTimeout(() => target.classList.remove('is-pressed'), 350);
+      addToCart(bookId, quantity);
+      
+      // Animation Effect
+      btn.classList.add('is-pressed');
+      setTimeout(() => btn.classList.remove('is-pressed'), 300);
+    }
   });
 }
 
+// 8. เริ่มต้นระบบ
 async function initCatalog() {
   try {
     const response = await fetch('books.json');
     allBooks = await response.json();
 
     fillTypeOptions(allBooks);
-    applyTypeFilter();
-
-    const storedCart = loadCartFromStorage();
-    if (storedCart) {
-      cart = storedCart;
-    } else {
-      const cartResponse = await fetch('cart.json');
-      const cartData = await cartResponse.json();
-      cart = Array.isArray(cartData) ? cartData : [];
-      saveCartToStorage();
-    }
-
+    renderBooks(allBooks);
+    
+    cart = loadCartFromStorage();
     updateCartCount();
+    
+    typeFilter.addEventListener('change', applyTypeFilter);
+    attachCartHandlers();
   } catch (error) {
-    emptyState.classList.remove('hidden');
-    emptyState.textContent = 'Could not load books right now.';
-    console.error('Error loading books:', error);
+    console.error('Error:', error);
+    if (emptyState) emptyState.textContent = 'ไม่สามารถโหลดข้อมูลหนังสือได้';
   }
 }
 
-typeFilter.addEventListener('change', applyTypeFilter);
-attachCartHandlers();
-
 initCatalog();
-
-

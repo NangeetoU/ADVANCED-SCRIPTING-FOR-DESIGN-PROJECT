@@ -6,110 +6,181 @@
     <title>The BOOKBRARY - Summary</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Animation สำหรับรายการสินค้า */
+        .summary-card {
+            animation: slideIn 0.4s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
 </head>
-<body class="bg-[#FDFCF0] text-[#1A1A1A] font-['Sarabun']">
+<body class="bg-[#FDFCF0] text-[#1A1A1A]">
 
-    <nav class="sticky top-0 w-full flex flex-wrap justify-between items-center gap-4 px-6 md:px-10 py-5 z-40 bg-[#2C3E50] shadow-md">
-        <div class="text-2xl font-bold text-[#FDFCF0] tracking-widest font-serif">THE BOOKBRARY</div>
-        <ul class="flex flex-wrap gap-4 text-[#FDFCF0] font-medium text-xs sm:text-sm w-full md:w-auto">
+    <nav class="sticky top-0 w-full flex justify-between items-center px-6 md:px-10 py-5 z-40 bg-[#2C3E50] shadow-md">
+        <div class="text-2xl font-bold text-[#FDFCF0] tracking-widest font-serif">
+            <span class="text-[#E67E22]">THE</span> BOOKBRARY
+        </div>
+        <ul class="hidden md:flex space-x-8 text-[#FDFCF0] font-medium text-sm">
             <li><a href="index.html" class="hover:text-[#E67E22] transition pb-1">HOME</a></li>
             <li><a href="catalog.html" class="hover:text-[#E67E22] transition pb-1">SHOP</a></li>
             <li><a href="summary.html" class="border-b-2 border-[#E67E22] pb-1">SUMMARY</a></li>
         </ul>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-12">
-        <h1 class="text-4xl md:text-5xl font-serif text-[#2C3E50] mb-4">Order Summary</h1>
-        <p class="text-gray-600 mb-10">สรุปรายการหนังสือที่คุณเลือก</p>
+    <main class="max-w-7xl mx-auto px-6 md:px-12 py-12">
+        <header class="mb-10">
+            <h1 class="text-4xl md:text-5xl font-serif text-[#2C3E50] mb-4">Order Summary</h1>
+            <p class="text-gray-600">ตรวจสอบรายการหนังสือที่คุณเลือกก่อนทำการยืนยันสั่งซื้อ</p>
+        </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <section class="lg:col-span-2 space-y-6">
-
-                <div class="summary-card bg-white border border-[#BDC3C7] rounded-xl p-4 md:p-6 shadow-sm flex flex-col md:flex-row gap-5 items-start md:items-center">
-                    <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=300"
-                         alt="The Wild Adventure"
-                         class="w-24 h-32 sm:w-32 sm:h-44 object-cover rounded-md shadow-md">
-
-                    <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-2xl font-bold text-[#2C3E50]">The Wild Adventure</h2>
-                        <p class="text-sm text-gray-500 mt-1">Category: Fiction</p>
-                        <p class="text-sm text-gray-500">Quantity: 1</p>
-                    </div>
-
-                    <div class="text-center md:text-right w-full md:w-auto">
-                        <p class="text-lg font-semibold text-[#E67E22]">฿ 350.00</p>
-                    </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <section id="summary-list" class="lg:col-span-2 space-y-6">
+                <div class="flex flex-col items-center justify-center py-20 bg-white border-2 border-dashed border-[#BDC3C7] rounded-2xl">
+                    <p class="text-gray-400 italic">กำลังโหลดตะกร้าสินค้าของคุณ...</p>
                 </div>
-
-                <div class="summary-card bg-white border border-[#BDC3C7] rounded-xl p-4 md:p-6 shadow-sm flex flex-col md:flex-row gap-5 items-start md:items-center">
-                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=300"
-                         alt="Design Thinking"
-                         class="w-24 h-32 sm:w-32 sm:h-44 object-cover rounded-md shadow-md">
-
-                    <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-2xl font-bold text-[#2C3E50]">Design Thinking</h2>
-                        <p class="text-sm text-gray-500 mt-1">Category: Design</p>
-                        <p class="text-sm text-gray-500">Quantity: 1</p>
-                    </div>
-
-                    <div class="text-center md:text-right w-full md:w-auto">
-                        <p class="text-lg font-semibold text-[#E67E22]">฿ 420.00</p>
-                    </div>
-                </div>
-
-                <div class="summary-card bg-white border border-[#BDC3C7] rounded-xl p-4 md:p-6 shadow-sm flex flex-col md:flex-row gap-5 items-start md:items-center">
-                    <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=300"
-                         alt="Into the Future"
-                         class="w-24 h-32 sm:w-32 sm:h-44 object-cover rounded-md shadow-md">
-
-                    <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-2xl font-bold text-[#2C3E50]">Into the Future</h2>
-                        <p class="text-sm text-gray-500 mt-1">Category: Technology</p>
-                        <p class="text-sm text-gray-500">Quantity: 1</p>
-                    </div>
-
-                    <div class="text-center md:text-right w-full md:w-auto">
-                        <p class="text-lg font-semibold text-[#E67E22]">฿ 310.00</p>
-                    </div>
-                </div>
-
             </section>
 
-            <aside class="bg-white border border-[#BDC3C7] rounded-xl shadow-md p-6 h-fit">
-                <h2 class="text-2xl font-serif text-[#2C3E50] mb-6">Summary</h2>
+            <aside class="h-fit sticky top-28">
+                <div class="bg-white border border-[#BDC3C7] rounded-2xl shadow-sm p-8">
+                    <h2 class="text-2xl font-serif text-[#2C3E50] mb-6 border-b pb-4">Order Totals</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span id="subtotal" class="font-semibold text-[#2C3E50]">฿ 0.00</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Shipping</span>
+                            <span class="text-green-600 font-bold uppercase text-xs">Free Delivery</span>
+                        </div>
+                        
+                        <div class="border-t border-double pt-6 mt-6 flex justify-between items-end">
+                            <span class="text-lg font-bold text-[#2C3E50]">Total Amount</span>
+                            <div class="text-right">
+                                <span id="total-price" class="text-3xl font-bold text-[#E67E22]">฿ 0.00</span>
+                                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">VAT Included</p>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="space-y-4 text-sm">
-                    <div class="flex justify-between">
-                        <span>Subtotal</span>
-                        <span>฿ 1,080.00</span>
-                    </div>
-                    <div class="flex justify-between">
-                        <span>Shipping</span>
-                        <span class="text-green-600 font-medium">Free</span>
-                    </div>
-                    <div class="border-t pt-4 flex justify-between text-lg font-bold text-[#2C3E50]">
-                        <span>Total</span>
-                        <span class="text-[#E67E22]">฿ 1,080.00</span>
-                    </div>
+                    <button class="w-full mt-10 bg-[#2C3E50] text-white py-4 rounded-xl font-bold hover:bg-[#E67E22] transform hover:-translate-y-1 transition-all duration-300 shadow-lg">
+                        CONFIRM ORDER
+                    </button>
+                    
+                    <a href="catalog.html" class="block text-center mt-4 text-[#2C3E50] text-sm font-semibold hover:text-[#E67E22] transition-colors">
+                        ← Continue Shopping
+                    </a>
                 </div>
-
-                <button class="w-full mt-8 bg-[#2C3E50] text-white py-3 rounded-lg font-semibold hover:bg-[#1f2d3a] transition">
-                    Confirm Order
-                </button>
-
-                <a href="catalog.html"
-                   class="block text-center mt-4 border border-[#2C3E50] text-[#2C3E50] py-3 rounded-lg font-semibold hover:bg-[#2C3E50] hover:text-white transition">
-                    Back to Shop
-                </a>
+                
+                <div class="mt-6 p-4 bg-[#2C3E50]/5 rounded-xl border border-[#2C3E50]/10">
+                    <p class="text-xs text-[#2C3E50]/70 leading-relaxed">
+                        <strong>Note:</strong> กรุณาตรวจสอบจำนวนและประเภทหนังสือให้ถูกต้อง หากมีข้อสงสัยติดต่อเจ้าหน้าที่ได้ตลอด 24 ชม.
+                    </p>
+                </div>
             </aside>
         </div>
     </main>
 
-    <footer class="bg-[#2C3E50] text-[#FDFCF0] mt-20 py-10 text-center">
+    <footer class="bg-[#2C3E50] text-[#FDFCF0] mt-24 py-12 text-center">
         <p class="text-2xl font-serif mb-3 tracking-widest">THE BOOKBRARY</p>
-        <p class="opacity-60 text-sm">© 2026 Advanced Scripting for Design Project.</p>
+        <p class="opacity-50 text-xs tracking-widest uppercase">© 2026 Advanced Scripting for Design Project</p>
     </footer>
 
+    <script>
+        // ใช้ Key เดียวกับที่ระบุใน catalog.js
+        const CART_STORAGE_KEY = 'bookbraly_cart';
+
+        function loadSummary() {
+            const container = document.getElementById('summary-list');
+            const subtotalEl = document.getElementById('subtotal');
+            const totalEl = document.getElementById('total-price');
+
+            // ดึงข้อมูลจาก localStorage ที่ถูกบันทึกมาจากหน้า Catalog
+            const storedData = localStorage.getItem(CART_STORAGE_KEY);
+            let cartItems = [];
+
+            try {
+                cartItems = storedData ? JSON.parse(storedData) : [];
+            } catch (e) {
+                console.error("Cart data corrupted");
+                cartItems = [];
+            }
+
+            // กรณีตะกร้าว่างเปล่า
+            if (cartItems.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center py-24 bg-white border-2 border-dashed border-[#BDC3C7] rounded-2xl">
+                        <div class="text-5xl mb-4 opacity-20">📖</div>
+                        <h3 class="text-xl font-bold text-[#2C3E50] mb-2 font-serif">Your cart is lonely.</h3>
+                        <p class="text-gray-500 mb-8">คุณยังไม่ได้เลือกหนังสือเล่มใดลงในตะกร้า</p>
+                        <a href="catalog.html" class="bg-[#2C3E50] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#E67E22] transition-all">
+                            Browse Catalog
+                        </a>
+                    </div>
+                `;
+                subtotalEl.innerText = `฿ 0.00`;
+                totalEl.innerText = `฿ 0.00`;
+                return;
+            }
+
+            container.innerHTML = ''; 
+            let totalAmount = 0;
+
+            // วนลูปสร้างการ์ดรายการหนังสือตามที่ผู้ใช้เลือกจริง
+            cartItems.forEach((item) => {
+                const itemSubtotal = item.price * item.quantity;
+                totalAmount += itemSubtotal;
+                
+                const card = `
+                    <div class="summary-card bg-white border border-[#BDC3C7] rounded-2xl p-5 md:p-6 shadow-sm flex flex-col md:flex-row gap-6 items-center group hover:border-[#E67E22] transition-colors">
+                        <div class="relative">
+                            <img src="${item.image}" alt="${item.title}" class="w-28 h-40 object-cover rounded-lg shadow-md group-hover:scale-105 transition-transform" onerror="this.src='https://via.placeholder.com/300x400?text=No+Image'">
+                            <span class="absolute -top-3 -right-3 bg-[#E67E22] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-lg border-2 border-white">
+                                ${item.quantity}
+                            </span>
+                        </div>
+                        
+                        <div class="flex-1 text-center md:text-left">
+                            <span class="text-[10px] font-bold text-[#E67E22] uppercase tracking-[0.2em] mb-1 block">${item.type}</span>
+                            <h2 class="text-2xl font-bold text-[#2C3E50] leading-tight">${item.title}</h2>
+                            <p class="text-sm text-gray-400 mt-2 font-medium">Unit Price: ฿ ${item.price.toLocaleString()}</p>
+                            
+                            <button onclick="deleteItem(${item.id})" class="mt-4 text-xs font-bold text-red-400 hover:text-red-600 flex items-center gap-1 mx-auto md:mx-0 transition-colors uppercase tracking-widest">
+                                <span>✕</span> Remove Item
+                            </button>
+                        </div>
+                        
+                        <div class="md:text-right border-t md:border-t-0 pt-4 md:pt-0 w-full md:w-auto">
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Subtotal</p>
+                            <p class="text-2xl font-bold text-[#2C3E50]">฿ ${itemSubtotal.toLocaleString()}.00</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+
+            // อัปเดตราคาสรุปผลรวมท้ายสุด
+            const formattedTotal = `฿ ${totalAmount.toLocaleString()}.00`;
+            subtotalEl.innerText = formattedTotal;
+            totalEl.innerText = formattedTotal;
+        }
+
+        // ฟังก์ชันลบสินค้าออกจากตะกร้าและอัปเดตหน้าจอทันที
+        window.deleteItem = function(id) {
+            let cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+            loadSummary(); // โหลดรายการใหม่โดยไม่ต้องรีเฟรชหน้า (Re-render)
+        };
+
+        // เรียกทำงานเมื่อ DOM โหลดเสร็จ
+        document.addEventListener('DOMContentLoaded', loadSummary);
+    </script>
 </body>
 </html>
