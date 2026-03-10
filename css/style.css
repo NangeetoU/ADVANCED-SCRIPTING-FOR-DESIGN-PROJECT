@@ -1,20 +1,10 @@
-/* =========================================
-   Global Variables (ใช้ร่วมกันทั้ง 3 หน้า)
-   ========================================= */
+/* Global Variables */
 :root {
     --primary-color: #2C3E50;
     --accent-color: #E67E22;
     --bg-color: #FDFCF0;
     --text-color: #1A1A1A;
 }
-
-/* =============================================================
-   ส่วนที่ปรับปรุง: สไตล์ฉากเปิดแบบหนังสือ 3D สมจริง
-   ============================================================= */
-
-/* =============================================================
-   ส่วนที่ปรับปรุง: สไตล์ฉากเปิดแบบหนังสือ รุ่น "เข้าใจง่าย"
-   ============================================================= */
 
 /* คอนเทนเนอร์หลัก (เต็มจอ) - ส่วนนี้ยังต้องใช้ Custom CSS */
 #intro-overlay {
@@ -29,7 +19,6 @@
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    /* แอนิเมชันซูมหายไปตอนจบ */
     animation: zoomOutMain 1.2s ease-in forwards 3s;
 }
 
@@ -46,7 +35,6 @@
     position: relative;
 }
 
-/* สันหนังสือ (สีเข้มๆ ด้านซ้าย) */
 .book-intro-spine {
     position: absolute;
     left: 0;
@@ -59,7 +47,6 @@
     box-shadow: 2px 0 10px rgba(0,0,0,0.2);
 }
 
-/* หน้ากระดาษด้านขวา (Welcome) */
 .book-intro-inside-right {
     position: absolute;
     right: 0;
@@ -75,7 +62,6 @@
     box-shadow: inset 5px 0 10px rgba(0,0,0,0.05);
 }
 
-/* ปกหน้า (ส่วนที่เคลื่อนที่) */
 .book-intro-cover-front {
     position: absolute;
     right: 0;
@@ -83,11 +69,7 @@
     width: calc(100% - 35px);
     height: 100%;
     z-index: 20;
-    
-    /* หัวใจสำคัญ: กำหนดจุดหมุนไว้ที่ขอบซ้ายของปก (ติดกับสันหนังสือ) */
     transform-origin: left; 
-    
-    /* เรียกใช้แอนิเมชันเปิดปก */
     animation: flipOpenCover 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards 0.8s;
 }
 
@@ -103,7 +85,6 @@
     box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ตัวหนังสือบนปก */
 .book-cover-text {
     color: var(--bg-color);
     font-size: 2rem;
@@ -112,7 +93,6 @@
     line-height: 1.2;
 }
 
-/* เส้นตกแต่งบนปก */
 .cover-decoration-line-top, .cover-decoration-line-bottom {
     position: absolute;
     left: 15%;
@@ -123,47 +103,38 @@
 .cover-decoration-line-top { top: 40px; }
 .cover-decoration-line-bottom { bottom: 40px; }
 
-/* =========================================
-   Animation Keyframes (แบบเข้าใจง่าย)
-   ========================================= */
-
-/* 1. แอนิเมชันเปิดปก: ใช้การหดขนาด (ScaleX) และเลื่อนไปทางซ้าย */
 @keyframes flipOpenCover {
     0% {
         transform: perspective(1000px) rotateY(0deg);
         opacity: 1;
     }
     100% {
-        /* หมุนไปด้านซ้าย -120 องศา ให้ความรู้สึกเหมือนเปิดหนังสือ */
         transform: perspective(1000px) rotateY(-120deg);
-        opacity: 0; /* ค่อยๆ จางหายไปเมื่อเปิดสุด */
+        opacity: 0;
     }
 }
 
-/* แอนิเมชันซูมออกเมื่อเปิดเสร็จ (ปรับให้นุ่มนวลขึ้น) */
 @keyframes zoomOutMain {
     0% { 
         transform: scale(1); 
         opacity: 1; 
     }
     100% { 
-        transform: scale(3); /* ไม่ต้องซูมเยอะเกินไปจนดูเว่อร์ */
+        transform: scale(3);
         opacity: 0; 
         visibility: hidden; 
     }
 }
 
-/* --- เพิ่มเติม: ตกแต่งหน้า Welcome ให้ดูดีขึ้น --- */
 .page-content {
     animation: fadeInContent 1s ease-out forwards 1.5s;
-    opacity: 0; /* รอให้ปกเปิดก่อนแล้วค่อยแสดงข้อความ */
+    opacity: 0;
 }
 
 @keyframes fadeInContent {
     to { opacity: 1; }
 }
 
-/* --- เอฟเฟกต์การ์ดหนังสือขายดี --- */
 #home-page .book-card {
     background: white;
     padding: 20px;
@@ -177,22 +148,19 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* สร้างเส้นขอบและเงาให้หัวข้อใหญ่ (Title) */
 .text-outline-pop {
-    color: var(--primary-color); /* สีน้ำเงินเข้ม */
+    color: var(--primary-color); 
     text-shadow: 
         -2px -2px 0 var(--bg-color),  
          2px -2px 0 var(--bg-color),
         -2px  2px 0 var(--bg-color),
          2px  2px 0 var(--bg-color),
-         0px  8px 15px rgba(0,0,0,0.3); /* เงาดำเข้มๆ ด้านล่างให้ข้อความลอยขึ้นมา */
+         0px  8px 15px rgba(0,0,0,0.3); 
 }
 
-/* สร้างแสงเรืองแสง (Glow) ให้ข้อความบรรยาย (Description) */
 .text-glow-read {
     color: #000000;
     font-weight: bold;
-    /* แสงฟุ้งๆ สีครีมกระจายรอบตัวอักษร ช่วยให้อ่านง่ายบนพื้นหลังทุกลาย */
     text-shadow: 
         0 0 10px var(--bg-color),
         0 0 20px var(--bg-color),
