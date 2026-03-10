@@ -4,13 +4,6 @@ const emptyState = document.getElementById('empty-state');
 
 let allBooks = [];
 
-function formatType(type) {
-  return type
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
-
 function renderBooks(books) {
   bookList.innerHTML = '';
 
@@ -31,7 +24,7 @@ function renderBooks(books) {
         <img src="${book.image}" alt="${book.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.textContent='No Image';" />
       </div>
       <h3 class="font-bold text-[#2C3E50] group-hover:text-[#E67E22] transition-colors">${book.title}</h3>
-      <p class="text-[#2C3E50] text-sm mt-1">${formatType(book.type)}</p>
+      <p class="text-[#2C3E50] text-sm mt-1">${book.type}</p>
       <p class="text-[#E67E22] font-semibold mt-1">&#3647; ${book.price.toFixed(2)}</p>
     `;
 
@@ -57,7 +50,7 @@ function fillTypeOptions(books) {
   types.forEach((type) => {
     const option = document.createElement('option');
     option.value = type;
-    option.textContent = formatType(type);
+    option.textContent = type;
     typeFilter.appendChild(option);
   });
 }
